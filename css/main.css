@@ -1,0 +1,540 @@
+html {
+    font-size: 62.5%;
+    /* 1rem = 10px baseline. Keep this — it's what lets the
+       small media-query tweaks below rescale EVERYTHING
+       (type + spacing) at once, instead of touching every rule. */
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* ---- design tokens ----------------------------------------------- */
+/* Pulled your repeated colors into variables so they're defined once.
+   Nothing here changes how anything looks — swap any rgba(...) below
+   for var(--name) at your own pace. */
+:root {
+    --pink: rgb(230, 53, 95);
+    --yellow: rgb(253, 207, 62);
+    --purple-dark: rgb(57, 36, 52);
+    --blue: rgb(58, 167, 224);
+    --orange: rgb(255, 159, 70);
+    --lavender: rgb(206, 150, 232);
+    --beige: rgb(255, 248, 239);
+    --blue-light: rgb(191, 228, 245);
+    --white: #fff;
+
+    --radius-pill: 2rem;
+    --radius-card: 1rem;
+    --gap: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.cards a {
+    color: var(--pink);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+header, .box, footer {
+    padding: 0 10%;
+}
+
+/* fonts uwu */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Titan One', Arial, sans-serif;
+}
+
+span, p, a {
+    font-family: 'Nunito', Arial, sans-serif;
+}
+
+h1 {
+    font-size: 6.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 3.5rem;
+    color: var(--purple-dark);
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.flex {
+    display: flex;
+}
+
+/* header! */
+header {
+    display: flex; 
+    height: 4.5rem;
+    align-items: center;
+    background: var(--pink);
+    color: white;
+    justify-content: space-between;
+
+    a {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        text-transform: uppercase; /* logo reads in caps in the design;
+            your markup has it as "Two Street Water Ice" title-case */
+        font-size: 1.8rem;
+    }
+}
+
+ul {
+    justify-content: space-around;
+}
+
+li {
+    display: inline;
+    font-weight: bold;
+}
+
+nav {
+    justify-content: flex-end;
+    width: 55%;
+}
+
+#banner {
+    background: var(--yellow);
+    color: var(--purple-dark);
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 2.5rem; 
+    padding: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* buttons */
+.yellow-button,
+.button {
+    display: inline-block;
+    padding: .5rem 3rem;
+    border-radius: var(--radius-pill);
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.yellow-button {
+    background: var(--yellow);
+    color: var(--purple-dark);
+}
+
+.button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.yellow-button:hover,
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.yellow-button:active,
+.button:active {
+    transform: translateY(0);
+}
+
+/* Give the two CTA links breathing room from each other.
+   Scoped to `main > section.flex` on purpose — your banner,
+   #flavor-flex, #location-flex, #size-flex, and the footer's
+   top row are ALSO <section class="flex">, and a bare
+   `section.flex` selector would have matched all of them too. */
+main > section.flex {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* main!! */
+main {
+    background-image: linear-gradient(45deg,
+            rgba(255, 0, 150, 1),
+            rgba(255, 0, 150, 0)),
+        url("philly-water.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: white;
+
+    section:first-child {
+        padding-top: 5rem;
+        min-height: 25rem;
+        width: 70%;
+    }
+
+    .flex {
+        min-height: 2rem; 
+    }
+
+    div {
+        width: 50%;
+        padding-top: 1rem;
+    }
+
+
+    section:first-child span {
+        font-size: 1.5rem;
+        color: var(--yellow);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* the tagline below the buttons — a direct child span of main,
+       not nested in a section */
+    > span {
+        display: block;
+        margin-top: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    p {
+        font-size: 1.7rem;
+        line-height: 2;
+    }
+}
+
+.mini-head {
+    color: var(--pink);
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* flavors */
+.flavorboard {
+    p {
+        margin-top: 1.6rem; /* space between the heading group and
+            the "Made in small batches..." intro paragraph */
+    }
+
+    em {
+        font-family: 'Titan One', Arial, sans-serif;
+        background: var(--yellow);
+        color: var(--purple-dark);
+        font-style: normal;
+        border-radius: 0.4rem;
+        padding: 0 0.5rem; /* small addition so the highlighted word
+                               doesn't look glued to the text around it */
+    }
+}
+
+
+#flavor-flex + span {
+    display: block; /* margin-top has no effect on an inline span */
+    margin-top: 2.4rem;
+}
+
+#flavor-flex {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-height: 30rem; 
+    gap: var(--gap);
+    margin-top: 3rem; /* space between the intro paragraph and the cards */
+}
+
+#cherry {
+    border-top: solid 1rem rgb(230, 53, 95);
+
+    div {
+        background: rgb(230, 53, 95);
+    }
+}
+
+#lemon {
+    border-top: solid 1rem rgb(255, 210, 62);
+
+    div {
+        background: rgb(255, 210, 62);
+    }
+}
+
+#blue-raspberry {
+    border-top: solid 1rem rgb(58, 167, 224);
+
+    div {
+        background: rgb(58, 167, 224);
+    }
+}
+
+#mango {
+    border-top: solid 1rem rgb(255, 159, 70);
+
+    div {
+        background: rgb(255, 159, 70);
+    }
+}
+
+#cotton-candy {
+    border-top: solid 1rem rgb(206, 150, 232);
+
+    div {
+        background: rgb(206, 150, 232);
+    }
+}
+
+/* location */
+#location-flex {
+    gap: var(--gap); 
+
+    .cards {
+        width: 25%;
+        min-height: 15rem; 
+
+        h4 {
+            color: var(--pink);
+            font-size: 1.9rem;
+            margin-bottom: 0.8rem;
+        }
+    }
+}
+
+#corner span {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+#house-rules span {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--purple-dark);
+    font-weight: bold;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.box {
+    min-height: 40rem;
+    padding-top: 3rem;
+}
+
+.cards {
+    border-radius: var(--radius-card);
+    background: white;
+    padding: 2rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(57, 36, 52, 0.08);
+
+    p {
+        color: rgba(57, 36, 52, 0.65); /* muted body text, distinct
+            from the bold dark/pink headings */
+    }
+}
+
+.card20 {
+    width: 18%;
+    min-height: 15rem;
+    text-align: center;
+
+    h4 {
+        font-size: 1.8rem;
+        color: var(--purple-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    h6 {
+        font-size: 2.6rem;
+        color: var(--pink);
+        margin: 0.3rem 0;
+    }
+}
+
+.card25 {
+    width: 22%;
+    min-height: 12rem;
+    text-align: left;
+
+
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    column-gap: 0.6rem;
+    row-gap: 0.8rem;
+
+    div {
+        grid-column: 1;
+        grid-row: 1;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        margin-top: 0.7rem; /* nudge to align with the cap-height of
+            the heading text next to it — tweak if it looks off */
+    }
+
+    h4 {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 2.5rem;
+        color: var(--purple-dark);
+        margin: 0;
+    }
+
+    p {
+        grid-column: 1 / -1;
+        margin: 0;
+    }
+}
+
+.card30 {
+    width: 30%;
+    min-height: 20rem;
+}
+
+#size-flex {
+    justify-content: space-evenly;
+    min-height: 15rem; 
+    gap: var(--gap);
+}
+
+/* bg colors */
+.beige {
+    background: var(--beige);
+}
+
+#sizes {
+    background: var(--blue-light);
+}
+
+footer {
+    padding-top: 3rem;
+    background: var(--purple-dark);
+    color: white;
+    min-height: 15rem; 
+    padding-bottom: 2rem;
+
+    .flex {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    div {
+        width: 40%;
+    }
+
+    p, span {
+        font-size: 1.5rem;
+    }
+}
+
+/* Bottom bar: divider line + centered row for the copyright text
+   and "Back to top" link. Needs a wrapper in the HTML — see note
+   below the CSS — since these are two loose sibling spans right
+   now and CSS can't group separate siblings into a flex row
+   without a shared parent. */
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* ==================== media queries ==================== */
+
+@media (width <=88rem) {
+    header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 1rem;
+    }
+
+    nav {
+        width: 100%; 
+    }
+
+    nav ul {
+        min-height: 20rem; 
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: space-around;
+        justify-content: space-between;
+    }
+}
+
+@media (width <=76rem) {
+    .flavorboard {
+        min-height: 60rem; 
+    }
+
+    section#flavor-flex.flex {
+        min-height: 35rem; 
+        flex-direction: column;
+
+        .card25 {
+            width: 100%;
+            min-height: 8rem;
+        }
+    }
+}
+
+@media (width <=50rem) {
+    /* Scale the whole page down at once — this is the payoff of the
+       62.5% + rem setup: one property, and every rem-based font size
+       and spacing value shrinks proportionally. */
+    html {
+        font-size: 55%;
+    }
+
+    main section:first-child,
+    main div {
+        width: 100%;
+    }
+
+    #location-flex .cards,
+    .card20,
+    .card25,
+    .card30 {
+        width: 45%; /* 2 per row */
+    }
+
+    footer .flex div {
+        width: 100%;
+    }
+}
+
+@media (width <=45rem) {
+    html {
+        font-size: 50%;
+    }
+
+    #location-flex .cards,
+    .card20,
+    .card25,
+    .card30 {
+        width: 100%; /* 1 per row */
+    }
+
+    main > section.flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .yellow-button,
+    .button {
+        text-align: center;
+    }
+}
